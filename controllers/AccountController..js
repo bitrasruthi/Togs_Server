@@ -1,10 +1,12 @@
 const OTPGenerator = require("otp-generator");
 const twilio = require("twilio");
 const { Login } = require("../models/UserModel");
+const elements = process.env;
 
-const accountSid = "ACdd2dcc319eafd01ec98b835786fd9ed9";
-const authToken = "27213fbe911d7756874d81ab00c26b98";
-const twilioClient = twilio(accountSid, authToken);
+const twilioClient = twilio(
+  elements.TWILIO_SECRET_KEY,
+  elements.TWILIO_AUTH_TOKEN
+);
 
 module.exports.sendOtp = async (req, res) => {
   const { phoneNumber } = req.body;
